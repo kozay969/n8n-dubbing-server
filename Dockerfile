@@ -1,15 +1,11 @@
-FROM docker.n8n.io/n8nio/n8n:latest-debian
+FROM n8nio/n8n:latest
 
 USER root
 
-# Install FFmpeg and Python inside Debian environment
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    python3 \
-    python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+# Install ffmpeg and python3
+RUN apk add --no-cache ffmpeg python3 py3-pip
 
-# Install edge-tts
+# Install edge-tts directly
 RUN pip3 install --no-cache-dir edge-tts --break-system-packages
 
 USER node
